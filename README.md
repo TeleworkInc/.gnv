@@ -1,4 +1,6 @@
-The default gnv configuration settings. For the gnv project, see [TeleworkInc/gnv](https://github.com/TeleworkInc/gnv).
+The default gnv configuration settings. 
+
+### For the gnv project, see [TeleworkInc/gnv](https://github.com/TeleworkInc/gnv).
 
 ## License
 ```none
