@@ -1,15 +1,16 @@
 /**
  * @license MIT
- *
+ */
+/**
  * @fileoverview
- * Uses Rollup for ESM bundling, primarily for dev refresh on save.
+ * Rollup ES dev config.
  */
 
 import glob from 'glob';
 import shebang from 'rollup-plugin-preserve-shebang';
 import exportDefault from 'rollup-plugin-export-default';
 
-export const exportESM = (file) => {
+const exportESM = (file) => {
   return {
     input: file,
     output: {
@@ -27,7 +28,7 @@ export const exportESM = (file) => {
   };
 };
 
-export const exportCJS = (file) => {
+const exportCJS = (file) => {
   return {
     input: file,
     output: {
