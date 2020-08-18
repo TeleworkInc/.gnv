@@ -7,7 +7,8 @@
  */
 
 import glob from 'glob';
-import { plugins } from './rollup.dist.plugins.js';
+import { distPlugins } from './rollup.plugins.js';
+import { distExternal } from './rollup.externals.js';
 
 const distEs = glob.sync('dev/*.mjs');
 
@@ -21,7 +22,8 @@ export default [
           // will help with compiler inlining
           preferConst: true,
         },
-        plugins: plugins,
+        plugins: distPlugins,
+        external: distExternal,
       }),
   ),
 ];

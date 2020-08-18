@@ -20,7 +20,7 @@ import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
  * just to ensure that we are never crawling dead dependencies. Big concern as
  * the dependency tree gets large (which is common with npm packages).
  */
-export const plugins = [
+export const distPlugins = [
   shebang(),
   /**
    * Input is Closure Compiled to minimize strain on `node-resolve`.
@@ -38,4 +38,11 @@ export const plugins = [
   nodeResolve({
     preferBuiltins: true,
   }),
+];
+
+/**
+ * Default plugins.
+ */
+export const defaultPlugins = [
+  shebang(),
 ];

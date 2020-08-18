@@ -7,7 +7,8 @@
  */
 
 import glob from 'glob';
-import shebang from 'rollup-plugin-preserve-shebang';
+import { defaultPlugins } from './rollup.plugins.js';
+import { devExternal } from './rollup.externals.js';
 
 export default (
   glob.sync(
@@ -20,9 +21,9 @@ export default (
     output: {
       file: file.replace('mjs', 'cjs'),
       format: 'cjs',
+      exports: 'named',
     },
-    plugins: [
-      shebang(),
-    ],
+    plugins: defaultPlugins,
+    external: devExternal,
   }))
 );

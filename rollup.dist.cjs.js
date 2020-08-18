@@ -7,7 +7,8 @@
  */
 
 import glob from 'glob';
-import { plugins } from './rollup.dist.plugins.js';
+import { distPlugins } from './rollup.plugins.js';
+import { distExternal } from './rollup.externals.js';
 
 const distCjs = glob.sync(
     'dist/*.mjs',
@@ -22,7 +23,9 @@ export default [
     output: {
       file: file.replace('mjs', 'cjs'),
       format: 'cjs',
+      exports: 'named',
     },
-    plugins: plugins,
+    plugins: distPlugins,
+    external: distExternal,
   })),
 ];

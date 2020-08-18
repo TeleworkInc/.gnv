@@ -8,6 +8,7 @@
 
 import glob from 'glob';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
+import { distExternal } from './rollup.externals.js';
 
 /**
  * Overwrite files in dist/.
@@ -28,6 +29,7 @@ export default [
             language_out: 'NO_TRANSPILE',
           }),
         ],
+        external: distExternal,
       }),
   ),
 ];

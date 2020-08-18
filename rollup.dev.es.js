@@ -7,8 +7,9 @@
  */
 
 import glob from 'glob';
-import shebang from 'rollup-plugin-preserve-shebang';
 import exportDefault from 'rollup-plugin-export-default';
+import { defaultPlugins } from './rollup.plugins.js';
+import { devExternal } from './rollup.externals.js';
 
 const exportESM = (file) => {
   return {
@@ -22,9 +23,10 @@ const exportESM = (file) => {
       preferConst: true,
     },
     plugins: [
-      shebang(),
+      ...defaultPlugins,
       exportDefault(),
     ],
+    external: devExternal,
   };
 };
 
@@ -38,6 +40,8 @@ const exportCJS = (file) => {
       format: 'cjs',
       preferConst: true,
     },
+    plugins: defaultPlugins,
+    external: devExternal,
   };
 };
 
