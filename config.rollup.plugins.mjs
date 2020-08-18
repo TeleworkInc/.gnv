@@ -1,3 +1,11 @@
+/**
+ * @license MIT
+ */
+/**
+ * @fileoverview
+ * Plugins for generating dist/ output with Rollup.
+ */
+
 import shebang from 'rollup-plugin-preserve-shebang';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -14,6 +22,9 @@ import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
  */
 export const plugins = [
   shebang(),
+  /**
+   * Input is Closure Compiled to minimize strain on `node-resolve`.
+   */
   closureCompiler({
     compilation_level: 'SIMPLE',
     language_in: 'ES_NEXT',
