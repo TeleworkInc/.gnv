@@ -9,13 +9,6 @@
 import glob from 'glob';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 
-// const distEs = glob.sync('dist/*.mjs');
-// const distCjs = glob.sync('dist/*.cjs');
-
-// const compiler = closureCompiler({
-
-// });
-
 /**
  * Overwrite files in dist/.
  */

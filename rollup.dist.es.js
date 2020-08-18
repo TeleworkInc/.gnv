@@ -7,7 +7,7 @@
  */
 
 import glob from 'glob';
-import { plugins } from './config.rollup.plugins.mjs';
+import { plugins } from './rollup.plugins.js';
 
 const distEs = glob.sync('dev/*.mjs');
 
