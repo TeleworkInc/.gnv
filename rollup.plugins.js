@@ -12,6 +12,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import disablePackages from 'rollup-plugin-disable-packages';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
+import bundleSize from 'rollup-plugin-bundle-size';
 
 /**
  * Plugins to use for rolling up Node deps.
@@ -38,6 +39,7 @@ export const distPlugins = [
   nodeResolve({
     preferBuiltins: true,
   }),
+  bundleSize(),
 ];
 
 /**
@@ -45,4 +47,5 @@ export const distPlugins = [
  */
 export const defaultPlugins = [
   shebang(),
+  bundleSize(),
 ];
