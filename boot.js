@@ -30,13 +30,13 @@ callNpm('link', '-f', '--no-save', '--silent');
 
 
 /**
- * Install gnvDependencies in this folder without updating package.json.
+ * Install gnvDependencies for the package.json in the parent folder.
  */
-installGnvDependencies();
+installGnvDependencies(true);
 
 
 /**
- * Globally install all peerDependencies without updating package.json, then
- * link all globally installed peerDeps to make them available in this package.
+ * Install peerDependencies for the package.json in the parent folder, and link
+ * into local `node_modules`.
  */
-installPeerDependencies();
+installPeerDependencies(true);
