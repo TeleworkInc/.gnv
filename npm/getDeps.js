@@ -9,5 +9,5 @@
  * @author Christian Lewis <hello@trytelework.com>
  */
 
-import { boot } from '../../package.js';
-(async () => await boot())();
+import { get } from '../../package.js';
+(async () => await get())();
