@@ -9,9 +9,9 @@
 
 import glob from 'glob';
 import exportDefault from 'rollup-plugin-export-default';
+import importMetaUrl from 'rollup-plugin-import-meta-url';
 import { defaultPlugins } from './rollup.plugins.js';
 import { devExternal } from './rollup.externals.js';
-import importMetaUrl from 'rollup-plugin-import-meta-url';
 
 const exportESM = (file) => ({
   input: file,
@@ -51,14 +51,17 @@ const exportCJS = (file) => ({
   external: devExternal,
 });
 
+const esmExports = glob.sync('exports/*.js');
+const cjsExports = glob.sync('exports/universal.js');
+
 export default [
   /**
    * Compile ESM builds for everything in the exports/ directory.
    */
-  ...glob.sync('exports/*.js').map(exportESM),
+  ...esmExports.map(exportESM),
   /**
    * Use Rollup to roll the universal CJS bundle since it will contain no Node
    * dependencies by definition.
    */
-  exportCJS('exports/universal.js'),
+  ...cjsExports.map(exportCJS),
 ];
