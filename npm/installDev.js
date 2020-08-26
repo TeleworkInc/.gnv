@@ -8,6 +8,10 @@
  */
 
 import { install } from '../../package.js';
+
+/**
+ * Install this program, including development gnvDependencies.
+ */
 (async () => await install({
   self: true,
   dev: true,

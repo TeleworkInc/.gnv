@@ -7,6 +7,9 @@
  * modules.
  */
 
+/**
+ * Install this program in release mode.
+ */
 import { install } from '../../package.js';
 (async () => await install({
   self: true,
