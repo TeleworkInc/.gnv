@@ -10,7 +10,11 @@
 /**
  * Install this program in release mode.
  */
-import { install } from '../../package.js';
+import {
+  PACKAGE_ROOT,
+  install,
+} from '../../package.js';
+
 (async () => await install({
-  self: true,
+  path: PACKAGE_ROOT,
 }))();
