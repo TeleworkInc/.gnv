@@ -6,7 +6,13 @@
  * Build the exe output. Use builtins only to avoid adding peerDeps.
  */
 
+import { existsSync } from 'fs';
 import { spawnSync } from 'child_process';
+
+if (!existsSync('dev/universal.mjs')) {
+  console.log('No universal export found in exports/.');
+  process.exit(0);
+}
 
 spawnSync(
     'google-closure-compiler',
