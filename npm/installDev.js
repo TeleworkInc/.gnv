@@ -15,7 +15,6 @@ import {
 /**
  * Install this program, including development gnvDependencies.
  */
-(async () => await install({
-  path: PACKAGE_ROOT,
+(async () => await install(PACKAGE_ROOT, {
   dev: true,
 }))();

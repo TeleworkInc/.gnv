@@ -15,6 +15,4 @@ import {
   install,
 } from '../../package.js';
 
-(async () => await install({
-  path: PACKAGE_ROOT,
-}))();
+(async () => await install(PACKAGE_ROOT))();
