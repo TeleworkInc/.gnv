@@ -7,11 +7,22 @@
  */
 
 import builtinModules from 'builtin-modules';
-import { readPackageJson } from '../package.js';
+import path from 'path';
+import { PACKAGE_ROOT, readPackageJson } from '../package.js';
 
-const packageJson = readPackageJson();
+/**
+ * Rollup will hot-swap the source and re-compute PACKAGE_ROOT using
+ * `import.meta` for this file, so we must resolve back to parent dir.
+ */
+const packageJson = readPackageJson(path.resolve(PACKAGE_ROOT, '..'));
 const peerDeps = Object.keys(packageJson.peerDependencies || {});
 const gnvDeps = Object.keys(packageJson.gnvDependencies || {});
+
+console.log({
+  PACKAGE_ROOT,
+  peerDeps,
+  gnvDeps,
+});
 
 export const disabledModules = [
   'fsevents',
