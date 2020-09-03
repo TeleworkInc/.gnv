@@ -10,7 +10,10 @@ import glob from 'glob';
 import { distPlugins } from './rollup.plugins.js';
 import { distExternal } from './rollup.externals.js';
 
-const distEs = glob.sync('dev/*.mjs');
+const distEs = glob.sync(
+    'dev/*.mjs',
+    { ignore: 'dev/exe.*' },
+);
 
 export default [
   ...distEs.map(

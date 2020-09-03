@@ -11,7 +11,11 @@ import { defaultPlugins } from './rollup.plugins.js';
 import { devExternal } from './rollup.externals.js';
 
 export default (
-  glob.sync('dev/*.mjs').map((file) => ({
+  glob.sync(
+      'dev/*.mjs',
+      /** exe can stay ES6 */
+      { ignore: 'dev/exe.*' },
+  ).map((file) => ({
     input: file,
     output: {
       file: file.replace('mjs', 'cjs'),

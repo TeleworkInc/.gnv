@@ -41,10 +41,4 @@ const exportESM = (file) => ({
 /**
  * Write ESM bundles to dev/ for everything except the exe export.
  */
-export default (
-  glob.sync(
-      'exports/*.js',
-      /** exe does not produce any exports. */
-      { ignore: 'exports/exe.js' },
-  ).map(exportESM)
-);
+export default glob.sync('exports/*.js').map(exportESM);
