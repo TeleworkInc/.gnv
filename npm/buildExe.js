@@ -28,9 +28,9 @@ spawnSync(
       '--isolation_mode IIFE',
       '--assume_function_wrapper',
       '--use_types_for_optimization',
+      '--js $(npm root -g)/google-closure-library/closure/goog/base.js',
       '--js lib/**.js',
       '--js exports/**.js',
-      '--js $(npm root -g)/google-closure-library/closure/goog/base.js',
       '--js_output_file dist/exe.js',
     ],
     {
