@@ -38,30 +38,13 @@ const exportESM = (file) => ({
   external: devExternal,
 });
 
-const exportCJS = (file) => ({
-  input: file,
-  output: {
-    file: file
-        .replace('exports', 'dev')
-        .replace('.js', '.cjs'),
-    format: 'cjs',
-    preferConst: true,
-  },
-  plugins: defaultPlugins,
-  external: devExternal,
-});
-
-const esmExports = glob.sync('exports/*.js');
-const cjsExports = glob.sync('exports/universal.js');
-
-export default [
-  /**
-   * Compile ESM builds for everything in the exports/ directory.
-   */
-  ...esmExports.map(exportESM),
-  /**
-   * Use Rollup to roll the universal CJS bundle since it will contain no Node
-   * dependencies by definition.
-   */
-  ...cjsExports.map(exportCJS),
-];
+/**
+ * Write ESM bundles to dev/ for everything except the exe export.
+ */
+export default (
+  glob.sync(
+      'exports/*.js',
+      /** exe does not produce any exports. */
+      { ignore: 'exports/exe.js' },
+  ).map(exportESM)
+);

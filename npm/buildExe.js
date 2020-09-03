@@ -9,21 +9,21 @@
 import { existsSync } from 'fs';
 import { spawnSync } from 'child_process';
 
-if (!existsSync('dev/universal.mjs')) {
-  console.log('No universal export found in exports/.');
+if (!existsSync('exports/exe.js')) {
+  console.log('No exe export found in exports/.');
   process.exit(0);
 }
 
 spawnSync(
     'google-closure-compiler',
     [
-      '--entry_point dev/universal.mjs',
+      '--entry_point exports/exe.js',
       '-O ADVANCED',
       '--process_common_js_modules',
       '--module_resolution NODE',
       '--dependency_mode PRUNE',
       '--js $(npm root -g)/google-closure-library/closure/goog/base.js',
-      '--js dev/universal.mjs',
+      '--js exports/exe.js',
       '--js_output_file dist/exe.js',
     ],
     {

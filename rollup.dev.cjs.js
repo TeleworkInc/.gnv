@@ -11,12 +11,7 @@ import { defaultPlugins } from './rollup.plugins.js';
 import { devExternal } from './rollup.externals.js';
 
 export default (
-  glob.sync(
-      'dev/*.mjs',
-      {
-        ignore: ['./dev/universal.*'],
-      },
-  ).map((file) => ({
+  glob.sync('dev/*.mjs').map((file) => ({
     input: file,
     output: {
       file: file.replace('mjs', 'cjs'),
