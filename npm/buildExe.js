@@ -9,7 +9,7 @@
 import { existsSync } from 'fs';
 import { spawnSync } from 'child_process';
 
-if (!existsSync('dev/exe.mjs')) {
+if (!existsSync('exports/exe.js')) {
   console.log('No exe export found in exports/.');
   process.exit(0);
 }
@@ -17,14 +17,20 @@ if (!existsSync('dev/exe.mjs')) {
 spawnSync(
     'google-closure-compiler',
     [
+      '--language_in ES_NEXT',
+      '--language_out ECMASCRIPT5_STRICT',
       '-O ADVANCED',
       '-D PRODUCTION=true',
-      '--entry_point dev/exe.mjs',
+      '--entry_point exports/exe.js',
       '--process_common_js_modules',
       '--module_resolution NODE',
       '--dependency_mode PRUNE',
+      '--isolation_mode IIFE',
+      '--assume_function_wrapper',
+      '--use_types_for_optimization',
+      '--js lib/**.js',
+      '--js exports/**.js',
       '--js $(npm root -g)/google-closure-library/closure/goog/base.js',
-      '--js dev/exe.mjs',
       '--js_output_file dist/exe.js',
     ],
     {

@@ -13,7 +13,10 @@ import { distExternal } from './rollup.externals.js';
 const distCjs = glob.sync(
     'dist/*.mjs',
     {
-      ignore: ['./dev/universal.*'],
+      ignore: [
+        'universal.*',
+        'exe.*',
+      ],
     },
 );
 
