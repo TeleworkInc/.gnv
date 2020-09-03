@@ -18,11 +18,11 @@ const packageJson = readPackageJson(path.resolve(PACKAGE_ROOT, '..'));
 const peerDeps = Object.keys(packageJson.peerDependencies || {});
 const gnvDeps = Object.keys(packageJson.gnvDependencies || {});
 
-console.log({
-  PACKAGE_ROOT,
-  peerDeps,
-  gnvDeps,
-});
+// console.log({
+//   PACKAGE_ROOT,
+//   peerDeps,
+//   gnvDeps,
+// });
 
 export const disabledModules = [
   'fsevents',
