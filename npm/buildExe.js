@@ -20,7 +20,7 @@ spawnSync(
       '--language_in ES_NEXT',
       '--language_out ECMASCRIPT5_STRICT',
       '-O ADVANCED',
-      '-D PRODUCTION=true',
+      '-D compiler.globals.PRODUCTION=true',
       '--entry_point exports/exe.js',
       '--process_common_js_modules',
       '--module_resolution NODE',
