@@ -34,8 +34,8 @@ glob.sync('exports/exe.*').map(
           '--extra_annotation_name constructor',
           /** Logic for @defines. */
           '--jscomp_off unknownDefines',
-          '-D compiler.globals.PRODUCTION=true',
-          '-D compiler.globals.DEBUG=false',
+          '-D PRODUCTION=true',
+          '-D DEBUG=false',
           /** I/O settings. */
           `--entry_point ${file}`,
           '--js lib/**.js',
