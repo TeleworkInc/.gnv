@@ -14,22 +14,29 @@ if (!glob.sync('exports/exe.*.js').length) {
   process.exit(0);
 }
 
-glob.sync(
-    'exports/exe.*',
-).map(
+/** Build all exe.* in exports. */
+glob.sync('exports/exe.*').map(
     (file) => spawnSync(
         'google-closure-compiler',
         [
+          /** Language in/out and compilation level. */
           '--language_in ES_NEXT',
           '--language_out ECMASCRIPT5_STRICT',
           '-O ADVANCED',
-          '-D compiler.globals.PRODUCTION=true',
+          /** Handle Node and CJS/ESM. */
           '--process_common_js_modules',
           '--module_resolution NODE',
           '--dependency_mode PRUNE',
+          /** Bundle into one giant closure, use type optimization. */
           '--isolation_mode IIFE',
           '--assume_function_wrapper',
           '--use_types_for_optimization',
+          '--extra_annotation_name constructor',
+          /** Logic for @defines. */
+          '--jscomp_off unknownDefines',
+          '-D compiler.globals.PRODUCTION=true',
+          '-D compiler.globals.DEBUG=false',
+          /** I/O settings. */
           `--entry_point ${file}`,
           '--js lib/**.js',
           '--js exports/**.js',
