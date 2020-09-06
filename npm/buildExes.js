@@ -9,7 +9,7 @@
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
-const exeExports = glob.sync('exports/exe.*'); 
+const exeExports = glob.sync('exports/exe.*');
 
 if (!exeExports.length) {
   console.log('No exe export found in exports/.');
