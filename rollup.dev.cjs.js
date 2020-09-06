@@ -7,8 +7,8 @@
  */
 
 import glob from 'glob';
-import { defaultPlugins } from './rollup.plugins.js';
-import { devExternal } from './rollup.externals.js';
+import { DEV_PLUGINS } from './rollup.plugins.js';
+import { DEV_EXTERNS } from './rollup.externs.js';
 
 export default (
   glob.sync(
@@ -21,7 +21,7 @@ export default (
       format: 'cjs',
       exports: 'named',
     },
-    plugins: defaultPlugins,
-    external: devExternal,
+    plugins: DEV_PLUGINS,
+    external: DEV_EXTERNS,
   }))
 );

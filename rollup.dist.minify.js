@@ -6,7 +6,7 @@
  * Rollup ES dist config.
  */
 
-import { distExternal } from './rollup.externals.js';
+import { DIST_EXTERNS } from './rollup.externs.js';
 import bundleSize from 'rollup-plugin-bundle-size';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 import glob from 'glob';
@@ -35,7 +35,7 @@ export default [
           }),
           bundleSize(),
         ],
-        external: distExternal,
+        external: DIST_EXTERNS,
       }),
   ),
 ];

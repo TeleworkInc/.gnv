@@ -10,8 +10,8 @@
 import glob from 'glob';
 import exportDefault from 'rollup-plugin-export-default';
 import importMetaUrl from 'rollup-plugin-import-meta-url';
-import { defaultPlugins } from './rollup.plugins.js';
-import { devExternal } from './rollup.externals.js';
+import { DEV_PLUGINS } from './rollup.plugins.js';
+import { DEV_EXTERNS } from './rollup.externs.js';
 
 const exportESM = (file) => ({
   input: file,
@@ -24,7 +24,7 @@ const exportESM = (file) => ({
     preferConst: true,
   },
   plugins: [
-    ...defaultPlugins,
+    ...DEV_PLUGINS,
     /**
      * Handle `import.meta.url` in dev ESM output. Resolve it the static
      * absolute path of the source file.
@@ -35,7 +35,7 @@ const exportESM = (file) => ({
      */
     exportDefault(),
   ],
-  external: devExternal,
+  external: DEV_EXTERNS,
 });
 
 /**

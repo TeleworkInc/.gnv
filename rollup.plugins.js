@@ -14,6 +14,8 @@ import disablePackages from 'rollup-plugin-disable-packages';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 import bundleSize from 'rollup-plugin-bundle-size';
 
+import { DISABLED_MODULES } from './rollup.externs.js';
+
 /**
  * Plugins to use for rolling up Node deps.
  *
@@ -21,32 +23,58 @@ import bundleSize from 'rollup-plugin-bundle-size';
  * just to ensure that we are never crawling dead dependencies. Big concern as
  * the dependency tree gets large (which is common with npm packages).
  */
-export const distPlugins = [
+export const DIST_PLUGINS = [
+  /**
+   * Leave shebangs if present.
+   */
   shebang(),
   /**
-   * Input is Closure Compiled to minimize strain on `node-resolve`.
+   * Closure Compile input with the lightest settings to minimize strain on
+   * resolution logic in `commonjs` and `node-resolve` plugins.
    */
   closureCompiler({
-    define: 'PRODUCTION=true',
+    /** Dist @define flags. */
+    define: [
+      'PRODUCTION=true',
+      'DEBUG=false',
+    ],
     compilation_level: 'SIMPLE',
+    /** Use most recent language features. */
     language_in: 'ES_NEXT',
+    /** Do not transpile. */
     language_out: 'NO_TRANSPILE',
   }),
+  /**
+   * Bundle CJS modules.
+   */
   commonjs({
     transformMixedEsModules: true,
   }),
+  /**
+   * Since CJS is supported, we must allow JSON resolution logic.
+   */
   json(),
-  disablePackages('fsevents'),
+  /**
+   * Manually disable packages that we don't want in the output, like
+   * `fsevents`.
+   */
+  disablePackages(...DISABLED_MODULES),
+  /**
+   * Finally, resolve the remaining inputs. Leave builtins.
+   */
   nodeResolve({
     preferBuiltins: true,
   }),
+  /**
+   * Print bundle sizes after gzip. Purely cosmetic.
+   */
   bundleSize(),
 ];
 
 /**
- * Default plugins.
+ * Dev plugins.
  */
-export const defaultPlugins = [
+export const DEV_PLUGINS = [
   shebang(),
   bundleSize(),
 ];
