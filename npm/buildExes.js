@@ -9,13 +9,15 @@
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
-if (!glob.sync('exports/exe.*.js').length) {
+const exeExports = glob.sync('exports/exe.*'); 
+
+if (!exeExports.length) {
   console.log('No exe export found in exports/.');
   process.exit(0);
 }
 
-/** Build all exe.* in exports. */
-glob.sync('exports/exe.*').map(
+/** Build all exe exports. */
+exeExports.map(
     (file) => spawnSync(
         'google-closure-compiler',
         [
