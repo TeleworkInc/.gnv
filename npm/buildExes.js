@@ -25,6 +25,7 @@ exeExports.map(
           '--language_in ES_NEXT',
           '--language_out ECMASCRIPT5_STRICT',
           '-O ADVANCED',
+          '-W VERBOSE',
           /** Handle Node and CJS/ESM. */
           '--process_common_js_modules',
           '--module_resolution NODE',
@@ -33,6 +34,10 @@ exeExports.map(
           '--isolation_mode IIFE',
           '--assume_function_wrapper',
           '--use_types_for_optimization',
+          /** Enable/disable rewrite_polyfills. */
+          // '--rewrite_polyfills',
+          /** JSDOC settings */
+          '--jscomp_off nonStandardJsDocs',
           '--extra_annotation_name constructor',
           /** Logic for @defines. */
           '--jscomp_off unknownDefines',
