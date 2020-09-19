@@ -34,13 +34,13 @@ exeExports.map(
           '--isolation_mode IIFE',
           '--assume_function_wrapper',
           '--use_types_for_optimization',
-          /** Enable/disable rewrite_polyfills. */
-          // '--rewrite_polyfills',
-          /** JSDOC settings */
+          /** Use compiler polyfills. */
+          '--rewrite_polyfills',
+          /** Disable warnings for nonstandard JSDOC annotations. */
           '--jscomp_off nonStandardJsDocs',
-          '--extra_annotation_name constructor',
-          /** Logic for @defines. */
+          /** Disable warnings for unknown @defines. */
           '--jscomp_off unknownDefines',
+          /** Logic for @defines. */
           '-D PRODUCTION=true',
           '-D DEBUG=false',
           /** I/O settings. */
