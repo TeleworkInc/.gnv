@@ -3,7 +3,7 @@
  */
 /**
  * @fileoverview
- * Plugins for generating dist/ output with Rollup.
+ * All externs for the Rollup process.
  */
 
 import builtinModules from 'builtin-modules';
@@ -18,7 +18,6 @@ import { PACKAGE_ROOT, readPackageJson } from '../package.js';
  * This only occurs when executing this file via `rollup -c`.
  */
 const packageJson = readPackageJson(path.resolve(PACKAGE_ROOT, '..'));
-// const packageJson = readPackageJson(PACKAGE_ROOT);
 
 const [
   deps,

@@ -3,7 +3,7 @@
  */
 /**
  * @fileoverview
- * Rollup ES dist config.
+ * Rollup dist minification config.
  */
 
 import { DIST_EXTERNS } from './rollup.externs.js';
