@@ -6,13 +6,14 @@
  * Plugins for generating dist/ output with Rollup.
  */
 
-import shebang from 'rollup-plugin-preserve-shebang';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
-import disablePackages from 'rollup-plugin-disable-packages';
-import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
+import babel from '@rollup/plugin-babel';
 import bundleSize from 'rollup-plugin-bundle-size';
+import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
+import commonjs from '@rollup/plugin-commonjs';
+import disablePackages from 'rollup-plugin-disable-packages';
+import json from '@rollup/plugin-json';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import shebang from 'rollup-plugin-preserve-shebang';
 
 import { DISABLED_MODULES } from './externs.js';
 
@@ -76,5 +77,15 @@ export const DIST_PLUGINS = [
  */
 export const DEV_PLUGINS = [
   shebang(),
+  /**
+   * Rewrite static class properties for Closure Compiler.
+   */
+  babel({
+    babelHelpers: 'bundled',
+    skipPreflightCheck: true,
+    plugins: [
+      'transform-class-properties',
+    ],
+  }),
   bundleSize(),
 ];

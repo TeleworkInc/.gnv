@@ -13,7 +13,7 @@ import { DEV_EXTERNS } from './externs.js';
 export default (
   glob.sync(
       'dev/*.mjs',
-      { ignore: 'exe.*' },
+      // { ignore: 'exe.*' },
   ).map((file) => ({
     input: file,
     output: {

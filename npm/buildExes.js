@@ -9,10 +9,11 @@
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
-const exeExports = glob.sync('exports/exe.*');
+// const exeExports = glob.sync('exports/exe.*');
+const exeExports = glob.sync('dev/exe.*.mjs');
 
 if (!exeExports.length) {
-  console.log('No exe export found in exports/.');
+  console.log('No compiled exe exports found in dev/.');
   process.exit(0);
 }
 
@@ -44,10 +45,17 @@ exeExports.map(
           '-D PRODUCTION=true',
           '-D DEBUG=false',
           /** I/O settings. */
+          /** Adjusting to use Rollup output exe. */
           `--entry_point ${file}`,
-          '--js lib/**.js',
-          '--js exports/**.js',
-          `--js_output_file ${file.replace('exports', 'dist')}`,
+          `--js ${file}`,
+          `--js_output_file ${
+            file.replace('dev/', 'dist/').replace('.mjs', '.js')
+          }`,
+          /** Original settings below. */
+          // `--entry_point ${file}`,
+          // '--js lib/**.js',
+          // '--js exports/**.js',
+          // `--js_output_file ${file.replace('exports', 'dist')}`,
         ],
         {
           shell: true,

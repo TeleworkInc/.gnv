@@ -10,6 +10,7 @@
 import glob from 'glob';
 import exportDefault from 'rollup-plugin-export-default';
 import importMetaUrl from 'rollup-plugin-import-meta-url';
+
 import { DEV_PLUGINS } from './plugins.js';
 import { DEV_EXTERNS } from './externs.js';
 
@@ -20,7 +21,7 @@ const exportESM = (file) => ({
         .replace('exports', 'dev')
         .replace('.js', '.mjs'),
     format: 'esm',
-    // will help with compiler inlining
+    /** Will help with compiler inlining. */
     preferConst: true,
   },
   plugins: [
@@ -38,12 +39,42 @@ const exportESM = (file) => ({
   external: DEV_EXTERNS,
 });
 
+const exportExe = (file) => ({
+  input: file,
+  output: {
+    file: file
+        .replace('exports', 'dev')
+        .replace('.js', '.mjs'),
+    format: 'esm',
+    /** Will help with compiler inlining. */
+    preferConst: true,
+  },
+  /** Includes shebang() and babel. */
+  plugins: DEV_PLUGINS,
+  /**
+   * Do not tree-shake exes due to Rollup DCE logic eliminating JSDOC typedefs.
+   */
+  treeshake: false,
+});
+
+/**
+ * All default exports in exports/.
+ */
+const devExports = glob.sync(
+    'exports/*.js',
+    { ignore: 'exports/exe.*' },
+).map(exportESM);
+
+/**
+ * All exe.* files in exports/.
+ */
+const exeExports = glob.sync('exports/exe.*.js').map(exportExe);
+
 /**
  * Write ESM bundles to dev/ for everything except the exe export.
  */
-export default (
-  glob.sync(
-      'exports/*.js',
-      { ignore: 'exports/exe.*' },
-  )
-).map(exportESM);
+export default [
+  ...devExports,
+  ...exeExports,
+];
+
