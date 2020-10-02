@@ -9,7 +9,7 @@
 import builtinModules from 'builtin-modules';
 import path from 'path';
 
-import { PACKAGE_ROOT, readPackageJson } from '../package.js';
+import { PACKAGE_ROOT, readPackageJson } from '../../package.js';
 
 /**
  * Rollup will hot-swap the source and re-compute PACKAGE_ROOT using

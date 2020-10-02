@@ -10,8 +10,8 @@
 import glob from 'glob';
 import exportDefault from 'rollup-plugin-export-default';
 import importMetaUrl from 'rollup-plugin-import-meta-url';
-import { DEV_PLUGINS } from './rollup.plugins.js';
-import { DEV_EXTERNS } from './rollup.externs.js';
+import { DEV_PLUGINS } from './plugins.js';
+import { DEV_EXTERNS } from './externs.js';
 
 const exportESM = (file) => ({
   input: file,
