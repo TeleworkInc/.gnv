@@ -84,7 +84,10 @@ export const DEV_PLUGINS = [
     babelHelpers: 'bundled',
     skipPreflightCheck: true,
     plugins: [
-      'transform-class-properties',
+      [
+        'transform-class-properties',
+        // { spec: true },
+      ],
     ],
   }),
   bundleSize(),

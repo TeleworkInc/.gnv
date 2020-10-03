@@ -1,0 +1,141 @@
+parser: '@babel/eslint-parser'
+
+parserOptions:
+  ecmaVersion: 11
+  requireConfigFile: false
+  babelOptions:
+    plugins:
+      - '@babel/plugin-syntax-class-properties'
+  # sourceType: module
+
+plugins:
+  - '@babel'
+  - consistent-imports
+
+env:
+  browser: true
+  commonjs: true
+  es2020: true
+  node: true
+
+extends:
+  - google
+  - plugin:consistent-imports/recommended
+  - plugin:jsdoc/recommended
+
+ignorePatterns:
+  - '!.gnv'
+  - '**/dist/**'
+  - '**/dev/**'
+  - externs.js
+
+rules:
+
+  array-bracket-spacing:
+    - error
+    - always
+
+  "@babel/new-cap": "error"
+  "@babel/no-invalid-this": "error"
+  "@babel/no-unused-expressions": "error"
+  "@babel/semi": "error"
+
+  no-invalid-this: 0
+
+  brace-style:
+    - error
+    - stroustrup
+
+  curly:
+    - error
+    - multi
+  
+  jsdoc/check-tag-names:
+    - error
+    # Anyone can add needed Closure @annotations for ESLint here.
+    - definedTags:
+      # for manually specifying constructors
+      - constructor
+      - category
+      - exportSymbol
+
+  jsdoc/check-types: 0
+
+  jsdoc/newline-after-description:
+    - error
+    - always
+
+  jsdoc/require-param-description: 0
+  jsdoc/require-returns-description: 0
+
+  jsdoc/require-file-overview: 
+    - error
+    - {
+        tags: {
+          fileoverview: {
+            initialCommentsOnly: true,
+            mustExist: false,
+            preventDuplicates: true,
+          },
+          license: {
+            initialCommentsOnly: true,
+            mustExist: true,
+            preventDuplicates: true,
+          },
+        }
+      }
+
+  no-var: 0
+
+  new-cap:
+    - error
+    - capIsNew: false
+
+  require-jsdoc:
+    - error
+    - require:
+        ClassDeclaration: true
+        MethodDefinition: false
+        FunctionDeclaration: true
+        FunctionExpression: false
+        ArrowFunctionExpression: false
+
+  # Keep operators at the end of lines so that if conditions are readable:
+  # if(
+  #   condition1 &&
+  #   condition2 && 
+  # )
+  #
+  # and ternary ops:
+  # test = true
+  #      ? 1
+  #      : 0;
+  operator-linebreak:
+    - error
+    - after
+    - {
+      overrides: {
+        '?': before,
+        ':': before
+      }
+    }
+
+  object-curly-spacing:
+    - error
+    - always
+
+  eol-last:
+    - error
+    - always
+
+settings:
+  jsdoc:
+    mode: closure
+    tagNamePreference:
+      # Closure Compiler overrides:
+      augments: extends
+      # class: constructor
+      file: fileoverview
+      fileoverview: fileoverview
+      object: Object
+      returns: return

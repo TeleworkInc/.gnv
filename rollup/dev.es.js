@@ -51,6 +51,8 @@ const exportExe = (file) => ({
   },
   /** Includes shebang() and babel. */
   plugins: DEV_PLUGINS,
+  /** Include externs. */
+  external: DEV_EXTERNS,
   /**
    * Do not tree-shake exes due to Rollup DCE logic eliminating JSDOC typedefs.
    */
