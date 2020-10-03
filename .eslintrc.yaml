@@ -40,12 +40,12 @@ rules:
     - capIsNew: false
     
   "@babel/no-invalid-this": "error"
-  "@babel/no-unused-expressions": "error"
+  # "@babel/no-unused-expressions": "error"
   "@babel/semi": "error"
 
   new-cap: 0
   no-invalid-this: 0
-  no-unused-expressions: 0
+  # no-unused-expressions: 0
   semi: 0
 
   brace-style:
