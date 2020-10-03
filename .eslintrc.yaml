@@ -35,12 +35,18 @@ rules:
     - error
     - always
 
-  "@babel/new-cap": "error"
+  "@babel/new-cap":
+    - error
+    - capIsNew: false
+    
   "@babel/no-invalid-this": "error"
   "@babel/no-unused-expressions": "error"
   "@babel/semi": "error"
 
+  new-cap: 0
   no-invalid-this: 0
+  no-unused-expressions: 0
+  semi: 0
 
   brace-style:
     - error
@@ -86,10 +92,6 @@ rules:
       }
 
   no-var: 0
-
-  new-cap:
-    - error
-    - capIsNew: false
 
   require-jsdoc:
     - error

@@ -6,7 +6,6 @@
  * Plugins for generating dist/ output with Rollup.
  */
 
-import babel from '@rollup/plugin-babel';
 import bundleSize from 'rollup-plugin-bundle-size';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 import commonjs from '@rollup/plugin-commonjs';
@@ -80,15 +79,29 @@ export const DEV_PLUGINS = [
   /**
    * Rewrite static class properties for Closure Compiler.
    */
-  babel({
-    babelHelpers: 'bundled',
-    skipPreflightCheck: true,
-    plugins: [
-      [
-        'transform-class-properties',
-        // { spec: true },
-      ],
-    ],
-  }),
+  /**
+   * @todo
+   * Write a custom Babel plugin that will rewrite:
+   *
+   * class ... {
+   *  static test = ...;
+   * }
+   *
+   * to:
+   *
+   * class ... {
+   *  static get test() { return ...; }
+   * }
+   */
+  // babel({
+  //   babelHelpers: 'bundled',
+  //   skipPreflightCheck: true,
+  //   plugins: [
+  //     [
+  //       '@babel/plugin-proposal-class-properties',
+  //       { spec: true },
+  //     ],
+  //   ],
+  // }),
   bundleSize(),
 ];
