@@ -21,6 +21,7 @@ export default (
       format: 'cjs',
       exports: 'named',
     },
+    /** Plugins and externs. */
     plugins: DEV_PLUGINS,
     external: DEV_EXTERNS,
   }))

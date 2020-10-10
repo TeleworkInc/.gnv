@@ -17,7 +17,7 @@ import { PACKAGE_ROOT, readPackageJson } from '../../package.js';
  *
  * This only occurs when executing this file via `rollup -c`.
  */
-const packageJson = readPackageJson(path.resolve(PACKAGE_ROOT, '..'));
+const packageJson = readPackageJson(path.resolve(PACKAGE_ROOT, '../../'));
 
 const [
   deps,
@@ -31,7 +31,9 @@ const [
   'gnvDependencies',
   'optionalDependencies',
   'peerDependencies',
-].map((field) => packageJson[field] || {}).map(Object.keys);
+].map(
+  (field) => Object.keys(packageJson[field] || {})
+);
 
 /**
  * Rollup cannot bundle these, and they should be disabled in the output
