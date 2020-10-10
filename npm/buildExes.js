@@ -9,7 +9,6 @@
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
-// const exeExports = glob.sync('exports/exe.*');
 const exeExports = glob.sync('dev/exe.*.mjs');
 
 if (!exeExports.length) {
@@ -45,7 +44,6 @@ exeExports.map(
           '-D PRODUCTION=true',
           '-D DEBUG=false',
           /** I/O settings. */
-          /** Adjusting to use Rollup output exe. */
           `--entry_point ${file}`,
           `--js ${file}`,
           `--js_output_file ${
