@@ -51,11 +51,6 @@ exeExports.map(
           `--js_output_file ${
             file.replace('dev/', 'dist/').replace('.mjs', '.js')
           }`,
-          /** Original settings below. */
-          // `--entry_point ${file}`,
-          // '--js lib/**.js',
-          // '--js exports/**.js',
-          // `--js_output_file ${file.replace('exports', 'dist')}`,
         ],
         {
           shell: true,

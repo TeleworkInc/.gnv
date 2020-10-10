@@ -7,6 +7,7 @@
  */
 
 import bundleSize from 'rollup-plugin-bundle-size';
+import classFieldsToGetters from 'rollup-plugin-class-fields-to-getters';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 import commonjs from '@rollup/plugin-commonjs';
 import disablePackages from 'rollup-plugin-disable-packages';
@@ -17,17 +18,25 @@ import shebang from 'rollup-plugin-preserve-shebang';
 import { DISABLED_MODULES } from './externs.js';
 
 /**
- * Plugins to use for rolling up Node deps.
- *
- * Includes a CL pass before CJS / Node resolution *plus* another pass after,
- * just to ensure that we are never crawling dead dependencies. Big concern as
- * the dependency tree gets large (which is common with npm packages).
+ * Plugins that will always be used.
  */
-export const DIST_PLUGINS = [
+const DEFAULT_PLUGINS = [
   /**
    * Leave shebangs if present.
    */
   shebang(),
+];
+
+/**
+ * Plugins used to process Rollup output in the `dist/` directory.
+ *
+ * This will include hundreds of thousands of lines of Rollup output for
+ * nontrivial Node packages, and a Closure Compiler pass is run on the input to
+ * prevent us from crawling dead dependencies. The output will receive a second
+ * pass with `-O ADVANCED` mode for maximum dead code elimination.
+ */
+export const DIST_PLUGINS = [
+  ...DEFAULT_PLUGINS,
   /**
    * Closure Compile input with the lightest settings to minimize strain on
    * resolution logic in `commonjs` and `node-resolve` plugins.
@@ -72,36 +81,15 @@ export const DIST_PLUGINS = [
 ];
 
 /**
- * Dev plugins.
+ * Plugins used to process Rollup output for the `dev/` directory.
  */
 export const DEV_PLUGINS = [
-  shebang(),
+  ...DEFAULT_PLUGINS,
   /**
-   * Rewrite static class properties for Closure Compiler.
+   * Transpile class fields to getters first so Closure Compiler can handle
+   * them in the dist stage.
+   *
+   * @see https://github.com/google/closure-compiler/issues/2731
    */
-  /**
-   * @todo
-   * Write a custom Babel plugin that will rewrite:
-   *
-   * class ... {
-   *  static test = ...;
-   * }
-   *
-   * to:
-   *
-   * class ... {
-   *  static get test() { return ...; }
-   * }
-   */
-  // babel({
-  //   babelHelpers: 'bundled',
-  //   skipPreflightCheck: true,
-  //   plugins: [
-  //     [
-  //       '@babel/plugin-proposal-class-properties',
-  //       { spec: true },
-  //     ],
-  //   ],
-  // }),
-  bundleSize(),
+  classFieldsToGetters(),
 ];
