@@ -15,7 +15,11 @@ import { PACKAGE_ROOT, readPackageJson } from '../../package.js';
  * Rollup will hot-swap the source and re-compute PACKAGE_ROOT using
  * `import.meta` for this file, so we must resolve back to parent dir.
  *
- * This only occurs when executing this file via `rollup -c`.
+ * This only occurs when executing this file via `rollup -c`, which is the only
+ * time this file will ever be executed, so this is tolerable, though not
+ * optimal.
+ *
+ * @see https://github.com/rollup/rollup/issues/3758
  */
 const packageJson = readPackageJson(path.resolve(PACKAGE_ROOT, '../../'));
 
