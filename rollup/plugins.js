@@ -14,7 +14,7 @@ import disablePackages from 'rollup-plugin-disable-packages';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 import bundleSize from 'rollup-plugin-bundle-size';
 
-import { DISABLED_MODULES } from './rollup.externs.js';
+import { DISABLED_MODULES } from './externs.js';
 
 /**
  * Plugins to use for rolling up Node deps.

@@ -7,8 +7,8 @@
  */
 
 import glob from 'glob';
-import { DEV_PLUGINS } from './rollup.plugins.js';
-import { DEV_EXTERNS } from './rollup.externs.js';
+import { DEV_PLUGINS } from './plugins.js';
+import { DEV_EXTERNS } from './externs.js';
 
 export default (
   glob.sync(
