@@ -49,6 +49,8 @@ exeExports.map(
           `--js_output_file ${
             file.replace('dev/', 'dist/').replace('.mjs', '.js')
           }`,
+          `--variable_renaming_report map.variables.txt`,
+          `--property_renaming_report map.properties.txt`,
         ],
         {
           shell: true,
