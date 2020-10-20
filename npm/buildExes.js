@@ -6,6 +6,7 @@
  * Build the exe output. Use builtins only to avoid adding peerDeps.
  */
 
+import path from 'path';
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
@@ -49,8 +50,8 @@ exeExports.map(
           `--js_output_file ${
             file.replace('dev/', 'dist/').replace('.mjs', '.js')
           }`,
-          `--variable_renaming_report map.variables.txt`,
-          `--property_renaming_report map.properties.txt`,
+          `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
+          `--property_renaming_report map.${path.basename(file)}.props.txt`,
         ],
         {
           shell: true,
