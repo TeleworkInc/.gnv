@@ -42,6 +42,7 @@ exeExports.map(
           /** Disable warnings for unknown @defines. */
           '--jscomp_off unknownDefines',
           /** Logic for @defines. */
+          // `-D DEV=${file.includes('dev')}`,
           '-D PRODUCTION=true',
           '-D DEBUG=false',
           /** I/O settings. */
@@ -50,8 +51,8 @@ exeExports.map(
           `--js_output_file ${
             file.replace('dev/', 'dist/').replace('.mjs', '.js')
           }`,
-          `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
-          `--property_renaming_report map.${path.basename(file)}.props.txt`,
+          // `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
+          // `--property_renaming_report map.${path.basename(file)}.props.txt`,
         ],
         {
           shell: true,
