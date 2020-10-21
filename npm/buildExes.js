@@ -6,7 +6,6 @@
  * Build the exe output. Use builtins only to avoid adding peerDeps.
  */
 
-import path from 'path';
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
