@@ -136,6 +136,8 @@ settings:
     tagNamePreference:
       # Closure Compiler overrides:
       augments: extends
+      # Closure Compiler const flag
+      constant: const
       # class: constructor
       file: fileoverview
       fileoverview: fileoverview
