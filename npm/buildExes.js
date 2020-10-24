@@ -64,13 +64,12 @@ exeExports.map(
              * Compiler-time overrides for @defines.
              */
             /** Set runtime COMPILED flag. */
-            '-D COMPILED=true',
             /** Enable debugging for inputs from source dir. */
-            `-D DEBUG=${outputFile.includes('dev/')}`,
+            `-D DEV=${outputFile.includes('dev/')}`,
             /** Set release flag if building to dist/. */
             `-D RELEASE=${outputFile.includes('dist/')}`,
-            /** Detect namespace export. */
-            `-D NAMESPACE=${inputFile.includes('exe.namespace')}`,
+            /** @todo Detect namespace, do not serialize CSS styles in JS. */
+            // `-D NAMESPACE=${inputFile.includes('exe.namespace')}`,
 
             /**
              * I/O settings.

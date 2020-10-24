@@ -44,9 +44,8 @@ export const DIST_PLUGINS = [
   closureCompiler({
     /** Dist @define flags. */
     define: [
-      'COMPILED=true',
-      'DEBUG=false',
       'RELEASE=true',
+      'DEV=false',
     ],
     compilation_level: 'SIMPLE',
     /** Use most recent language features. */
