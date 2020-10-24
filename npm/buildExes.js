@@ -16,46 +16,75 @@ if (!exeExports.length) {
   process.exit(0);
 }
 
-/** Build all exe exports. */
+/**
+ * Build all exe exports.
+ */
 exeExports.map(
-    (file) => spawnSync(
-        'google-closure-compiler',
-        [
-          /** Language in/out and compilation level. */
-          '--language_in ES_NEXT',
-          '--language_out ECMASCRIPT5_STRICT',
-          '-O ADVANCED',
-          '-W VERBOSE',
-          /** Handle Node and CJS/ESM. */
-          '--process_common_js_modules',
-          '--module_resolution NODE',
-          '--dependency_mode PRUNE',
-          /** Bundle into one giant closure, use type optimization. */
-          '--isolation_mode IIFE',
-          '--assume_function_wrapper',
-          '--use_types_for_optimization',
-          /** Use compiler polyfills. */
-          '--rewrite_polyfills',
-          /** Disable warnings for nonstandard JSDOC annotations. */
-          '--jscomp_off nonStandardJsDocs',
-          /** Disable warnings for unknown @defines. */
-          '--jscomp_off unknownDefines',
-          /** Logic for @defines. */
-          // `-D DEV=${file.includes('dev')}`,
-          '-D PRODUCTION=true',
-          '-D DEBUG=false',
-          /** I/O settings. */
-          `--entry_point ${file}`,
-          `--js ${file}`,
-          `--js_output_file ${
-            file.replace('dev/', 'dist/').replace('.mjs', '.js')
-          }`,
+    (inputFile) => {
+      const outputFile = inputFile.replace('dev/', 'dist/');
+      spawnSync(
+          'google-closure-compiler',
+          [
+          /**
+           * Language in/out and compilation level.
+           */
+            '--language_in ES_NEXT',
+            '--language_out ECMASCRIPT5_STRICT',
+            '-O ADVANCED',
+            '-W VERBOSE',
+
+            /**
+             * CJS/ESM flags.
+             */
+            '--process_common_js_modules',
+            '--module_resolution NODE',
+            '--dependency_mode PRUNE',
+
+            /**
+             * Compile to a type-optimized IIFE.
+             */
+            '--isolation_mode IIFE',
+            '--assume_function_wrapper',
+            '--use_types_for_optimization',
+
+            /**
+             * Disable compiler polyfills.
+             */
+            // '--rewrite_polyfills false',
+
+            /**
+             * Miscellaneous flags.
+             */
+            /** Disable warnings for nonstandard JSDOC annotations. */
+            '--jscomp_off nonStandardJsDocs',
+            /** Disable warnings for unknown @defines. */
+            '--jscomp_off unknownDefines',
+
+            /**
+             * Compiler-time overrides for @defines.
+             */
+            /** Set runtime COMPILED flag. */
+            '-D COMPILED=true',
+            /** Enable debugging for inputs from source dir. */
+            `-D DEBUG=${outputFile.includes('dev/')}`,
+            /** Set release flag if building to dist/. */
+            `-D RELEASE=${outputFile.includes('dist/')}`,
+            /** Detect namespace export. */
+            `-D NAMESPACE=${inputFile.includes('exe.namespace')}`,
+
+            /**
+             * I/O settings.
+             */
+            `--entry_point ${inputFile}`,
+            `--js ${inputFile}`,
+            `--js_output_file ${outputFile.replace('.mjs', '.js')}`,
           // `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
           // `--property_renaming_report map.${path.basename(file)}.props.txt`,
-        ],
-        {
-          shell: true,
-          stdio: 'inherit',
-        },
-    ),
+          ],
+          {
+            shell: true,
+            stdio: 'inherit',
+          },
+      );
+    },
 );
