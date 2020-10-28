@@ -16,6 +16,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import shebang from 'rollup-plugin-preserve-shebang';
 
 import { DISABLED_MODULES } from './externs.js';
+import { existsSync } from 'fs';
 
 /**
  * Plugins that will always be used.
@@ -81,15 +82,16 @@ export const DIST_PLUGINS = [
 ];
 
 /**
- * Plugins used to process Rollup output for the `dev/` directory.
+ * Plugins used to process Rollup output for the `dev/` directory. 
  */
-export const DEV_PLUGINS = [
-  ...DEFAULT_PLUGINS,
-  /**
-   * Transpile class fields to getters first so Closure Compiler can handle
-   * them in the dist stage.
-   *
-   * @see https://github.com/google/closure-compiler/issues/2731
-   */
-  classFieldsToGetters(),
-];
+let DEV_PLUGINS = [...DEFAULT_PLUGINS];
+
+/**
+ * For Web Widgets projects, transpile class fields to getters first so
+ * Closure Compiler can handle them in the dist stage.
+ *
+ * @see https://github.com/google/closure-compiler/issues/2731
+ */
+if (existsSync('.widget')) DEV_PLUGINS.push(classFieldsToGetters());
+
+export { DEV_PLUGINS };
