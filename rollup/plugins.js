@@ -92,6 +92,6 @@ let DEV_PLUGINS = [...DEFAULT_PLUGINS];
  *
  * @see https://github.com/google/closure-compiler/issues/2731
  */
-if (existsSync('.widget')) DEV_PLUGINS.push(classFieldsToGetters());
+if (existsSync('.widgets')) DEV_PLUGINS.push(classFieldsToGetters());
 
 export { DEV_PLUGINS };
