@@ -13,7 +13,10 @@ import { DEV_EXTERNS } from './externs.js';
 export default (
   glob.sync(
       'dev/*.mjs',
-      // { ignore: 'exe.*' },
+      /**
+       * Do not transpile executables, as they will output to ES5.
+       */
+      { ignore: 'dev/exe.*' },
   ).map((file) => ({
     input: file,
     output: {
