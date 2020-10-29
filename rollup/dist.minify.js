@@ -31,7 +31,7 @@ export default [
           closureCompiler({
             compilation_level: 'SIMPLE',
             language_in: 'ES_NEXT',
-            language_out: 'NO_TRANSPILE',
+            language_out: 'ECMASCRIPT5_STRICT',
           }),
           bundleSize(),
         ],
