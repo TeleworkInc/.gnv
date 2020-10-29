@@ -68,7 +68,7 @@ exeExports.map(
 
             /** Set release flag if building to dist/. */
             `-D RELEASE=${outputFile.includes('dist/')}`,
-            
+
             /** @todo Detect namespace, do not serialize CSS styles in JS. */
             // `-D NAMESPACE=${inputFile.includes('exe.namespace')}`,
 
