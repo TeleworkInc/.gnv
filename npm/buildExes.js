@@ -9,7 +9,7 @@
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
-const exeExports = glob.sync('dev/exe.*.mjs');
+const exeExports = glob.sync('dev/exe.*');
 
 if (!exeExports.length) {
   console.log('No compiled exe exports found in dev/.');
