@@ -43,7 +43,7 @@ const exportExe = (file) => ({
   input: file,
   output: {
     file: file
-        .replace('exports', 'dev')
+        .replace('exports/', 'dev/')
         .replace('.js', '.mjs'),
     format: 'esm',
     /** Will help with compiler inlining. */
@@ -69,7 +69,7 @@ const devExports = glob.sync(
 /**
  * All exe.* files in exports/.
  */
-const exeExports = glob.sync('exports/exe.*.js').map(exportExe);
+const exeExports = glob.sync('exports/exe.*').map(exportExe);
 
 /**
  * Write ESM bundles to dev/ for everything except the exe export.
