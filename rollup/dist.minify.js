@@ -37,7 +37,7 @@ export default [
              * @todo
              * Find out why CJS breaks for some reason with ES5 or ES5_STRICT.
              */
-            language_out: 'ES6',
+            language_out: 'NO_TRANSPILE',
           }),
           bundleSize(),
         ],
