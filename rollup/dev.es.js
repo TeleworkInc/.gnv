@@ -63,7 +63,9 @@ const exportExe = (file) => ({
  */
 const devExports = glob.sync(
     'exports/*.js',
-    { ignore: 'exports/exe.*' },
+    {
+      ignore: 'exports/exe.*',
+    },
 ).map(exportESM);
 
 /**

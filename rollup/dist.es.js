@@ -12,7 +12,9 @@ import { DIST_EXTERNS } from './externs.js';
 
 const distEs = glob.sync(
     'dev/*.mjs',
-    { ignore: 'dev/exe.*' },
+    {
+      ignore: 'dev/exe.*',
+    },
 );
 
 export default [
