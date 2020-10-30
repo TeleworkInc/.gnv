@@ -12,6 +12,7 @@ import { DIST_EXTERNS } from './externs.js';
 
 const distEs = glob.sync(
     'dev/*.mjs',
+    /** Don't compile exes, as they only export side effects. */
     { ignore: 'dev/exe.*' },
 );
 

@@ -43,11 +43,6 @@ export const DIST_PLUGINS = [
    * resolution logic in `commonjs` and `node-resolve` plugins.
    */
   closureCompiler({
-    /** Dist @define flags. */
-    define: [
-      'RELEASE=true',
-      'DEV=false',
-    ],
     compilation_level: 'SIMPLE',
     /** Use most recent language features. */
     language_in: 'ES_NEXT',

@@ -10,15 +10,7 @@ import glob from 'glob';
 import { DIST_PLUGINS } from './plugins.js';
 import { DIST_EXTERNS } from './externs.js';
 
-const distCjs = glob.sync(
-    'dist/*.mjs',
-    {
-      ignore: [
-        'universal.*',
-        'exe.*',
-      ],
-    },
-);
+const distCjs = glob.sync('dist/*.mjs');
 
 export default [
   ...distCjs.map((file) => ({

@@ -9,7 +9,7 @@
 import glob from 'glob';
 import { spawnSync } from 'child_process';
 
-const exeExports = glob.sync('dev/exe.*.mjs');
+const exeExports = glob.sync('dev/exe.*');
 
 if (!exeExports.length) {
   console.log('No compiled exe exports found in dev/.');
@@ -63,11 +63,12 @@ exeExports.map(
             /**
              * Compiler-time overrides for @defines.
              */
-            /** Set runtime COMPILED flag. */
             /** Enable debugging for inputs from source dir. */
             `-D DEV=${outputFile.includes('dev/')}`,
+
             /** Set release flag if building to dist/. */
             `-D RELEASE=${outputFile.includes('dist/')}`,
+
             /** @todo Detect namespace, do not serialize CSS styles in JS. */
             // `-D NAMESPACE=${inputFile.includes('exe.namespace')}`,
 
