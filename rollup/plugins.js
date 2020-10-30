@@ -82,9 +82,9 @@ export const DIST_PLUGINS = [
 ];
 
 /**
- * Plugins used to process Rollup output for the `dev/` directory. 
+ * Plugins used to process Rollup output for the `dev/` directory.
  */
-let DEV_PLUGINS = [...DEFAULT_PLUGINS];
+const DEV_PLUGINS = [ ...DEFAULT_PLUGINS ];
 
 /**
  * For Web Widgets projects, transpile class fields to getters first so

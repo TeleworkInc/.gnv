@@ -30,7 +30,7 @@ const exportESM = (file) => ({
      * Handle `import.meta.url` in dev ESM output. Resolve it the static
      * absolute path of the source file.
      */
-    importMetaUrl(),
+    // importMetaUrl(),
     /**
      * Export named exports as default if no default export defined.
      */
