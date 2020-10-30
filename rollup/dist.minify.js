@@ -32,10 +32,9 @@ export default [
             compilation_level: 'SIMPLE',
             language_in: 'ES_NEXT',
             /**
-             * Do not support newer than ES6 in output.
-             *
              * @todo
-             * Find out why CJS breaks for some reason with ES5 or ES5_STRICT.
+             * Add transpilation - will not compile with it for some reason,
+             * even with ES6.
              */
             language_out: 'NO_TRANSPILE',
           }),
