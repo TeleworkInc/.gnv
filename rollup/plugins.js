@@ -51,8 +51,8 @@ export const DIST_PLUGINS = [
     compilation_level: 'SIMPLE',
     /** Use most recent language features. */
     language_in: 'ES_NEXT',
-    /** Do not transpile. */
-    language_out: 'ES5_STRICT',
+    /** Will be transpiled during dist:minify. */
+    language_out: 'NO_TRANSPILE',
   }),
   /**
    * Bundle CJS modules.

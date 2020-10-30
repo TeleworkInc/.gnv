@@ -31,7 +31,13 @@ export default [
           closureCompiler({
             compilation_level: 'SIMPLE',
             language_in: 'ES_NEXT',
-            language_out: 'NO_TRANSPILE',
+            /**
+             * Do not support newer than ES6 in output.
+             *
+             * @todo
+             * Find out why CJS breaks for some reason with ES5 or ES5_STRICT.
+             */
+            language_out: 'ES6',
           }),
           bundleSize(),
         ],
