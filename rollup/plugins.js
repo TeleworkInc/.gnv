@@ -52,7 +52,7 @@ export const DIST_PLUGINS = [
     /** Use most recent language features. */
     language_in: 'ES_NEXT',
     /** Do not transpile. */
-    language_out: 'NO_TRANSPILE',
+    language_out: 'ES5_STRICT',
   }),
   /**
    * Bundle CJS modules.
