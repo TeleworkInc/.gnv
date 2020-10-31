@@ -49,13 +49,13 @@ export const DISABLED_MODULES = [
 
 export const DIST_EXTERNS = [
   /**
-   * Ignore disabled modules.
-   */
-  ...DISABLED_MODULES,
-  /**
    * Ignore builtins.
    */
   ...builtinModules,
+  /**
+   * Ignore disabled modules.
+   */
+  ...DISABLED_MODULES,
   /**
    * Ignore peerDeps, should be available globally.
    */
@@ -63,6 +63,10 @@ export const DIST_EXTERNS = [
 ];
 
 export const DEV_EXTERNS = [
+  /**
+   * Ignore builtins.
+   */
+  ...builtinModules,
   /**
    * Inherit all dist externs.
    */

@@ -3,19 +3,21 @@
  */
 /**
  * @fileoverview
- * Rollup ES dist config.
+ * This file will resolve node modules for scripts in the dev directory and
+ * leave us with scripts in dist/ that are ready for Closure Compiler.
  */
 
 import glob from 'glob';
 import { DIST_PLUGINS } from './plugins.js';
 import { DIST_EXTERNS } from './externs.js';
 
-const distEs = glob.sync(
-    'dev/*.mjs',
-    {
-      ignore: 'dev/exe.*',
-    },
-);
+const devEsModules = glob.sync('dev/*.mjs');
+const preformattedExes = glob.sync('dev/exe.*');
+
+const distEs = [
+  ...devEsModules,
+  ...preformattedExes,
+];
 
 export default [
   ...distEs.map(

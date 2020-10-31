@@ -10,10 +10,10 @@ import glob from 'glob';
 import { spawnSync } from 'child_process';
 
 /** Catch exe.mjs and exe.*.mjs */
-const exeExports = glob.sync('dev/exe.**(.?)mjs');
+const exeExports = glob.sync('dist/exe.**(.?)js');
 
 if (!exeExports.length) {
-  console.log('No compiled exe exports found in dev/.');
+  console.log('No compiled exe exports found in dist/.');
   process.exit(0);
 }
 
@@ -22,7 +22,8 @@ if (!exeExports.length) {
  */
 exeExports.map(
     (inputFile) => {
-      const outputFile = inputFile.replace('dev/', 'dist/');
+      const outputFile = inputFile;
+      // const outputFile = inputFile.replace('dev/', 'dist/');
       spawnSync(
           'google-closure-compiler',
           [
@@ -76,8 +77,8 @@ exeExports.map(
             /**
              * I/O settings.
              */
-            `--entry_point ${inputFile}`,
             `--js ${inputFile}`,
+            `--entry_point ${inputFile}`,
             `--js_output_file ${outputFile.replace('.mjs', '.js')}`,
           // `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
           // `--property_renaming_report map.${path.basename(file)}.props.txt`,

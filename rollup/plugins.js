@@ -73,6 +73,8 @@ export const DIST_PLUGINS = [
    * Finally, resolve the remaining inputs. Leave builtins.
    */
   nodeResolve({
+    extensions: [ '.cjs', '.mjs', '.js', '.json', '.node' ],
+    mainFields: [ 'main', 'module', 'jsnext:main' ],
     preferBuiltins: true,
   }),
   /**

@@ -34,7 +34,7 @@ const exportESM = (file) => ({
     /**
      * Export named exports as default if no default export defined.
      */
-    exportDefault(),
+    // exportDefault(),
   ],
   external: DEV_EXTERNS,
 });
@@ -43,8 +43,7 @@ const exportExe = (file) => ({
   input: file,
   output: {
     file: file
-        .replace('exports/', 'dev/')
-        .replace('.js', '.mjs'),
+        .replace('exports/', 'dev/'),
     format: 'esm',
     /** Will help with compiler inlining. */
     preferConst: true,
