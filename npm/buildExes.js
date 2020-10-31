@@ -10,7 +10,7 @@ import glob from 'glob';
 import { spawnSync } from 'child_process';
 
 /** Catch exe.mjs and exe.*.mjs */
-const exeExports = glob.sync('dist/exe.**(.?)js');
+const exeExports = glob.sync('dev/exe.**(.?)js');
 
 if (!exeExports.length) {
   console.log('No compiled exe exports found in dist/.');
@@ -77,11 +77,14 @@ exeExports.map(
             /**
              * I/O settings.
              */
+            // '--js node_modules/web-widgets/dist/**',
             `--js ${inputFile}`,
             `--entry_point ${inputFile}`,
             `--js_output_file ${outputFile.replace('.mjs', '.js')}`,
-          // `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
-          // `--property_renaming_report map.${path.basename(file)}.props.txt`,
+            // `--variable_renaming_report map.${path.basename(file)}.vars.txt`,
+            // `--property_renaming_report map.${path.basename(file)}.props.txt`,
+
+            // '--jscomp_off "*"',
           ],
           {
             shell: true,

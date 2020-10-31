@@ -8,11 +8,13 @@
  */
 
 import glob from 'glob';
-import exportDefault from 'rollup-plugin-export-default';
+// import exportDefault from 'rollup-plugin-export-default';
 import importMetaUrl from 'rollup-plugin-import-meta-url';
 
 import { DEV_PLUGINS } from './plugins.js';
 import { DEV_EXTERNS } from './externs.js';
+
+console.log('DEV:ES');
 
 const exportESM = (file) => ({
   input: file,
@@ -28,7 +30,7 @@ const exportESM = (file) => ({
     ...DEV_PLUGINS,
     /**
      * Handle `import.meta.url` in dev ESM output. Resolve it the static
-     * absolute path of the source file.
+     * relative path of the source file.
      */
     importMetaUrl(),
     /**
@@ -44,9 +46,14 @@ const exportExe = (file) => ({
   output: {
     file: file
         .replace('exports/', 'dev/'),
-    format: 'esm',
+    format: (
+      file.includes('exe.')
+        ? 'cjs'
+        : 'esm'
+    ),
     /** Will help with compiler inlining. */
     preferConst: true,
+    exports: 'named',
   },
   /** Plugins and externs. */
   plugins: DEV_PLUGINS,

@@ -11,12 +11,14 @@ import glob from 'glob';
 import { DIST_PLUGINS } from './plugins.js';
 import { DIST_EXTERNS } from './externs.js';
 
+console.log('DIST:ES');
+
 const devEsModules = glob.sync('dev/*.mjs');
 const preformattedExes = glob.sync('dev/exe.*');
 
 const distEs = [
   ...devEsModules,
-  ...preformattedExes,
+  // ...preformattedExes,
 ];
 
 export default [

@@ -10,6 +10,8 @@ import glob from 'glob';
 import { DIST_PLUGINS } from './plugins.js';
 import { DIST_EXTERNS } from './externs.js';
 
+console.log('DIST:CJS');
+
 const distCjs = glob.sync(
     'dist/*.mjs',
     {

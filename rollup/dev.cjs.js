@@ -10,6 +10,8 @@ import glob from 'glob';
 import { DEV_PLUGINS } from './plugins.js';
 import { DEV_EXTERNS } from './externs.js';
 
+console.log('DEV:CJS');
+
 export default (
   glob.sync(
       'dev/*.mjs',

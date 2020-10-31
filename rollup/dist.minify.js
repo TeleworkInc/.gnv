@@ -11,6 +11,8 @@ import bundleSize from 'rollup-plugin-bundle-size';
 import closureCompiler from '@ampproject/rollup-plugin-closure-compiler';
 import glob from 'glob';
 
+console.log('DIST:MINIFY');
+
 /**
  * Overwrite files in dist/.
  */

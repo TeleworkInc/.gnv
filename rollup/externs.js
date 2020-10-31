@@ -76,6 +76,5 @@ export const DEV_EXTERNS = [
    */
   ...deps,
   ...devDeps,
-  ...gnvDeps,
   ...optionalDeps,
 ];
