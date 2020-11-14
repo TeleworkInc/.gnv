@@ -6,7 +6,8 @@
  */
 
 import inlineSource from 'inline-source';
-import fsPromises from 'fs/promises';
+// import fsPromises from 'fs/promises';
+import fs from 'fs';
 
 (async () => {
   try {
@@ -18,7 +19,7 @@ import fsPromises from 'fs/promises';
         },
     );
 
-    await fsPromises.writeFile('widget.freeze.html', html);
+    fs.writeSync('widget.freeze.html', html);
     console.log('Minified widget.freeze.html.');
   }
   catch (err) {
