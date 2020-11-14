@@ -19,7 +19,7 @@ import fs from 'fs';
         },
     );
 
-    fs.writeSync('widget.freeze.html', html);
+    fs.writeFileSync('widget.freeze.html', html);
     console.log('Minified widget.freeze.html.');
   }
   catch (err) {
